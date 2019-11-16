@@ -9,7 +9,7 @@ class CampaignController extends Controller
 {
     public function index() {
     	//if userId is set, request the id, otherwise abort
-    	$userId = isset(Request()->user()->id) ? Request()->user()->id : abort(404);
+    	$userId = isset(request()->user()->id) ? request()->user()->id : abort(404);
 
     	$campaigns = Campaign::where('user_id', $userId)->get();
 

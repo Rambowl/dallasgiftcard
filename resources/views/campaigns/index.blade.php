@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-	<h2>Campaigns</h2>
-	<main>
+	
+		<h1>Campaigns</h1>
+	<div>
 		@forelse ($campaigns as $campaign)
 			<div>
 				{{ $campaign->title }}
@@ -12,6 +13,6 @@
 				There are no campaigns. Please create some.
 			</div>
 		@endforelse
-	</main>
+	</div>
 
 @endsection

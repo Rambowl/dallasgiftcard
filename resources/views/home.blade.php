@@ -3,20 +3,6 @@
 @section('content')
     <div class="flex flex-col items-center">
 
-        <!-- navigation -->
-        <div class="bg-gray-400 w-1/2">
-            <ul class="flex items-center justify-between underline mb-5 text-4xl py-2 px-4">
-                <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800" href="/campaigns">Campaigns</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800" href="#">Customers</a>
-                </li>
-                <li>
-                    <a class="text-blue-500 hover:text-blue-800" href="#">Redeem</a>
-                </li>
-            </ul>
-        </div>
         <div class="md:w-1/2 md:mx-auto mt-4">
             <div class="text-2xl text-gray-600 border border-gray-400 rounded p-4">
                 Campaign Data
