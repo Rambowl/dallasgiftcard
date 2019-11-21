@@ -4,10 +4,10 @@
     <div class="flex flex-col items-center">
 
         <div class="md:w-1/2 md:mx-auto mt-4">
-            <div class="text-2xl text-gray-600 border border-gray-400 rounded p-4">
+            <div class="text-2xl text-gray-600 bg-gray-300 border border-gray-500 rounded p-4">
                 Campaign Data
-                <div class="text-black text-lg mt-4 ml-4">
-                    Testing
+                <div class="text-black text-lg mt-4">
+                    Revenue: $0.00
                 </div>
             </div>
             {{--@if (session('status'))

@@ -12,7 +12,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none">
+<body class="bg-gray-400 h-screen antialiased leading-none">
     <div id="app">
         <nav class="bg-blue-700 shadow mb-8 py-4">
             <div class="container mx-auto px-6 md:px-0">
@@ -35,7 +35,7 @@
                                     <a class="text-blue-400 hover:text-blue-800" href="/campaigns">CAMPAIGNS</a>
                                 </li>
                                 <li class="mr-10">
-                                    <a class="text-blue-400 hover:text-blue-800" href="#">CUSTOMERS</a>
+                                    <a class="text-blue-400 hover:text-blue-800" href="#">MAILING LISTS</a>
                                 </li>
                                 <li>
                                     <a class="text-blue-400 hover:text-blue-800" href="#">REDEEM</a>

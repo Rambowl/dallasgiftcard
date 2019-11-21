@@ -29,7 +29,7 @@
     @endif
 
     <div class="min-h-screen flex items-center justify-center">
-        <div class="flex flex-col justify-around h-full">
+        <div class="flex flex-col justify-center h-full">
             <img src="{{ asset('images/logo.png') }}" width="600" height="60">
             <div class="mt-2">          
                 <ul class="flex items-center justify-between">

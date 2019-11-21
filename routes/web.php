@@ -18,5 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/campaigns', 'CampaignController@index');
+Route::post('/campaigns', 'CampaignController@store');
+Route::get('/campaigns/create', 'CampaignController@create');
+Route::get('/campaigns/{campaign}', 'CampaignController@show');
+Route::get('/campaigns/{campaign}/edit', 'CampaignController@edit');
+Route::put('/campaigns/{campaign}', 'CampaignController@update');
