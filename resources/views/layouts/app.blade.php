@@ -51,7 +51,7 @@
                                 <a class="no-underline hover:underline text-gray-300 text-base p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <span class="text-gray-300 text-base pr-4">Welcome, {{ ucfirst(Auth::user()->name) }}</span>
+                            <span class="text-gray-300 text-base pr-4">Welcome, {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}</span>
 
                             <a href="{{ route('logout') }}"
                                class="no-underline hover:underline text-gray-300 text-base p-3"

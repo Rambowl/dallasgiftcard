@@ -25,7 +25,17 @@
 			</div>
 			<div class="mb-4">
 				<label for="description" class="flex flex-col text-xl mb-2">Description</label>
-				<textarea id="description" name="description" class="textarea border border-gray-500 rounded p-1 w-full"></textarea>
+				<textarea id="description" name="description" class="textarea 
+					@error('description')
+						border border-red-600 
+				   	@else 
+						border border-gray-500 
+					@enderror
+						rounded p-1 w-full"></textarea>
+
+				@error('description')
+					<p class="text-red-600 text-sm mt-2 italic">{{ $errors->first('description') }}</p>
+				@enderror
 			</div>	
 
 			<footer class="flex justify-end mt-5">
