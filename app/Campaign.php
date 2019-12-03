@@ -7,9 +7,11 @@ use Carbon\Carbon;
 
 class Campaign extends Model
 {
-	//the campaign owner
-	public function owner() {
-		return $this->belongsTo(User::class);
+	protected $guarded = [];
+	
+	//the campaign user
+	public function business() {
+		return $this->belongsTo(Business::class);
 	}
 
 	public function getMyDateFormat($id) {

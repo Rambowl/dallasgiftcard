@@ -4,64 +4,67 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Campaign;
+use App\Business;
 
 class CampaignController extends Controller
 {
 	//render a list of the resource.
     public function index() {
     	//if userId is set, request the id, otherwise abort
-    	$userId = isset(request()->user()->id) ? request()->user()->id : abort(404);
+        //$userID = auth()->check() ? auth()->user()->id : abort(404);
+        $userID = auth()->user()->id;
 
-    	$campaigns = Campaign::where('user_id', $userId)->get();
+        //get the businesses
+        $businesses = Business::where('user_id', $userID)->get();
 
-    	return view('campaigns.index', compact('campaigns'));	
+    	$campaigns = Campaign::where('user_id', $userID)->get();
+
+    	return view('campaigns.index', compact('businesses'), compact('campaigns'));	
     }
 
-	//show a single resource.
-    public function show($id) {
-        $campaign = Campaign::find($id);
-
+	//show a single resource.; the argument passing is the campaign id
+    public function show(Campaign $campaign) {
         return view('campaigns.show', compact('campaign'));
     }
 
     //shows a view to create a new resource.
     public function create() {
-    	return view('campaigns.create');
+        //get userID
+        $userID = auth()->check() ? auth()->user()->id : abort(404);
+
+        //get the businesses
+        $businesses = Business::where('user_id', $userID)->get();
+
+    	return view('campaigns.create', compact('businesses'));
     }
 
     //persist the new resource.
     public function store() {
+
+        //dd(request()->all());
         //validation
-        request()->validate([
-            'title' => 'required',
-            'description' => 'required',
+        $this->validateRequest();
+
+        //create the campaign db
+        Campaign::create([
+            'title' => request('title'),
+            'description' => request('description'),
+            'type' => 'Newsletter',
+            'user_id' => auth()->user()->id,
+            'business_id' => request('businesses')
         ]);
-
-        $campaign = new Campaign();
-
-        $campaign->title = request('title');
-        $campaign->description = request('description');
-        $campaign->type = 'Newsletter';
-        $campaign->user_id = request()->user()->id;
-        $campaign->save();
 
     	return redirect('/campaigns');
     }
 
     //show a view to edit the existing resource.
-    public function edit($id) {
-        $campaign = Campaign::find($id);
-
+    public function edit(Campaign $campaign) {
         return view('campaigns.edit', compact('campaign'));
     }
 
     //persist the edited resource.
-   	public function update($id) {
-        $campaign = Campaign::find($id);
-
-        $campaign->title = request('title');
-        $campaign->description = request('description');
-        $campaign->save();
+   	public function update(Campaign $campaign) {
+        $campaign->update($this->validateRequest());
 
         return redirect('/campaigns/' . $campaign->id);
    	}
@@ -70,4 +73,12 @@ class CampaignController extends Controller
    	public function destroy() {
 
    	}
+
+    //method for validating campaign
+    protected function validateRequest() {
+        return request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+    }
 }

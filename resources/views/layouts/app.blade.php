@@ -35,6 +35,9 @@
                                     <a class="text-blue-400 hover:text-blue-800" href="/campaigns">CAMPAIGNS</a>
                                 </li>
                                 <li class="mr-10">
+                                    <a class="text-blue-400 hover:text-blue-800" href="#">CUSTOMERS</a>
+                                </li>
+                                <li class="mr-10">
                                     <a class="text-blue-400 hover:text-blue-800" href="#">MAILING LISTS</a>
                                 </li>
                                 <li>

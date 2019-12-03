@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Campaign::class, function (Faker $faker) {
     return [
-    	'user_id' => factory(User::class)->create(),
+    	'business_id' => factory(Business::class)->create(),
         'title' => $faker->sentence,
         'description' => $faker->text,
         'type' => $faker->sentence,

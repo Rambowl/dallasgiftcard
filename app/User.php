@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function campaign() {
-        return $this->hasMany(Campaign::class);
+    public function businesses() {
+        return $this->hasMany(Business::class);
     }
 }
