@@ -29,11 +29,8 @@ class CampaignController extends Controller
 
     //shows a view to create a new resource.
     public function create() {
-        //get userID
-        $userID = auth()->check() ? auth()->user()->id : abort(404);
-
         //get the businesses
-        $businesses = Business::where('user_id', $userID)->get();
+        $businesses = Business::where('user_id', auth()->user()->id)->get();
 
     	return view('campaigns.create', compact('businesses'));
     }
@@ -49,7 +46,7 @@ class CampaignController extends Controller
         Campaign::create([
             'title' => request('title'),
             'description' => request('description'),
-            'type' => 'Newsletter',
+            'type' => request('type'),
             'user_id' => auth()->user()->id,
             'business_id' => request('businesses')
         ]);
@@ -59,7 +56,12 @@ class CampaignController extends Controller
 
     //show a view to edit the existing resource.
     public function edit(Campaign $campaign) {
-        return view('campaigns.edit', compact('campaign'));
+        //get the businesses
+        //$businesses = Business::where('user_id', auth()->user()->id)->get();
+
+        $businessName = Business::find($campaign->business_id)->business_name;
+
+        return view('campaigns.edit', compact('campaign'), compact('businessName'));
     }
 
     //persist the edited resource.

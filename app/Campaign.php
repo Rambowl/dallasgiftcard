@@ -21,6 +21,6 @@ class Campaign extends Model
 
 	//the path of the campaigns
     public function path() {
-    	return '/campaigns/{$this->id}';
+    	return "/campaigns/{$this->id}";
     }
 }
