@@ -14,6 +14,10 @@ class BusinessController extends Controller
     	return view('businesses.index', compact('businesses'));
     }
 
+    /*public function show(Business $business) {
+        return view('businesses.show', compact('business'));
+    }*/
+
     public function create() {
     	return view('businesses.create');
     }
@@ -31,11 +35,23 @@ class BusinessController extends Controller
     		'zip_code' => request('zip_code'),
     		'phone_1' => request('phone_1'),
     		'phone_2' => request('phone_2'),
+            'email' => request('email'),
     		'website' => request('website'),
+            'description' => request('description'),
     		'user_id' => auth()->user()->id,
     	]);
 
     	return redirect('/businesses');
+    }
+
+    public function edit(Business $business) {
+        return view('businesses.edit', compact('business'));
+    }
+
+    public function update(Business $business) {
+        $business->update($this->validateRequest());
+
+        return redirect('/businesses/');
     }
 
     //validate before saving to database
@@ -43,9 +59,15 @@ class BusinessController extends Controller
     	return request()->validate([
     		'business_name' => 'required',
     		'address_1' => 'required',
+            'address_2' => '',
     		'city' => 'required',
     		'state' => 'required',
-    		'zip_code' => 'required'
+    		'zip_code' => 'required',
+            'phone_1' => '',
+            'phone_2' => '',
+            'email' => 'regex:/^.+@.+$/i',
+            'website' => '',
+            'description' => ''
     	]);
     }
 }

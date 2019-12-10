@@ -6,9 +6,7 @@
 		@method('PUT')
 
 		@include('campaigns.form', [
-			'campaigns' => $campaign,
 			'businesses' => [],
-			'businessName' => $businessName,
 			'buttonText' => 'Update'
 		])
 		

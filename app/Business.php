@@ -16,4 +16,8 @@ class Business extends Model
     public function campaigns() {
     	return $this->hasMany(Campaign::class);
     }
+
+    public function path() {
+    	return "/businesses/{$this->id}";
+    }
 }

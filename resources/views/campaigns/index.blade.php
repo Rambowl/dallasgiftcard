@@ -22,7 +22,7 @@
 				</div>
 
 				<!-- campaign cards -->
-			<div class="lg:flex lg:flex-wrap mx-3">
+				<div class="lg:flex lg:flex-wrap mx-3">
 				@forelse ($campaigns->sortByDesc('updated_at') as $campaign)
 
 					<div class="lg:w-1/4 px-3 pb-6 bg-indigo-200 border rounded-lg m-3">

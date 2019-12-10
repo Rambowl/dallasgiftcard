@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/businesses', 'BusinessController@index');
 	Route::post('/businesses', 'BusinessController@store');
 	Route::get('/businesses/create', 'BusinessController@create');
+	//Route::get('/businesses/{business}', 'BusinessController@show');
+	Route::get('/businesses/{business}/edit', 'BusinessController@edit');
+	Route::put('/businesses/{business}', 'BusinessController@update');
 
 	Route::get('/campaigns', 'CampaignController@index');
 	Route::post('/campaigns', 'CampaignController@store');

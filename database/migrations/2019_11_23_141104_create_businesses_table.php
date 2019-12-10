@@ -24,9 +24,10 @@ class CreateBusinessesTable extends Migration
             $table->string('zip_code');
             $table->string('phone_1')->nullable();
             $table->string('phone_2')->nullable();
+            $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
-            $table->string('logo')->nullable();
+            $table->text('logo')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });
