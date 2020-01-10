@@ -18,6 +18,7 @@ Route::get('/', function () {
 //middleware will check to see if the user is logged in before continuing
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/account', 'AccountController@index');
 
 	Route::get('/businesses', 'BusinessController@index');
 	Route::post('/businesses', 'BusinessController@store');

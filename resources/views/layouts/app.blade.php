@@ -54,15 +54,22 @@
                                 <a class="no-underline hover:underline text-gray-300 text-base p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <span class="text-gray-300 text-base pr-4">Welcome, {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}</span>
-
+                        <dropdown align="right" width="200px">
+                            <template v-slot:trigger>
+                                <span class="text-gray-300 text-base pr-4">Welcome, {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}</span>
+                            </template>
+                            <a href="#" class="block text-base px-4 py-2 hover:text-white hover:bg-blue-800">My Account</a>
+                            <a href="{{ url('/businesses')}}" class="block text-base px-4 py-2 hover:text-white hover:bg-blue-800">My Businesses</a>
+                            
                             <a href="{{ route('logout') }}"
-                               class="no-underline hover:underline text-gray-300 text-base p-3"
+                               class="block text-base px-4 py-2 hover:text-white hover:bg-blue-800"
                                onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                            
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                                 {{ csrf_field() }}
                             </form>
+                        </dropdown>
                         @endguest
                     </div>
                 </div>

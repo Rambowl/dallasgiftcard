@@ -12,17 +12,28 @@
 			<div class="flex flex-row px-4 py-5 justify-between items-center mb-3 mr-3">
 				<div class="text-3xl">Campaign Management</div>
 				<div>
+					
 					@if (count($businesses) > 0)
-						<a href="campaigns/create" class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600">
+						@foreach ($businesses as $business)
+						@php
+							$busInfo[] = $business->business_name;
+						@endphp
+							
+						@endforeach					
+						<a href="campaigns/create" class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600" @click.prevent="$modal.show('new-campaign', 		
+							{
+								businesses: '{{ json_encode($businesses) }}'
+							})">
 							New Campaign</a></div>
+
 					@else
 						<a class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600 cursor-not-allowed opacity-50">
 							New Campaign</a></div>
 					@endif
-				</div>
+			</div>
 
-				<!-- campaign cards -->
-				<div class="lg:flex lg:flex-wrap mx-3">
+			<!-- campaign cards -->
+			<div class="lg:flex lg:flex-wrap mx-3">
 				@forelse ($campaigns->sortByDesc('updated_at') as $campaign)
 
 					<div class="lg:w-1/4 px-3 pb-6 bg-indigo-200 border rounded-lg m-3">
@@ -34,9 +45,7 @@
 					</div>
 				@endforelse
 			</div>
-			</div>
-
-
 		</div>
 	</div>
+	<new-campaign-modal></new-campaign-modal>
 @endsection

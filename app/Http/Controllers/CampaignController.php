@@ -43,13 +43,17 @@ class CampaignController extends Controller
         $this->validateRequest();
 
         //create the campaign db
-        Campaign::create([
+        $campaign = Campaign::create([
             'title' => request('title'),
             'description' => request('description'),
             'type' => request('type'),
             'user_id' => auth()->user()->id,
-            'business_id' => request('businesses')
+            'business_id' => request('business_id')
         ]);
+
+        if (request()->wantsJson()) {
+            return ['message' => $campaign->path()];
+        }
 
     	return redirect('/campaigns');
     }
@@ -81,6 +85,8 @@ class CampaignController extends Controller
         return request()->validate([
             'title' => 'required',
             'description' => 'required',
+            'type' => 'required',
+            'business_id' => 'required'
         ]);
     }
 }
