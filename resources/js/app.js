@@ -8,8 +8,11 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VModal from 'vue-js-modal';
- 
 Vue.use(VModal);
+
+import Swal from 'sweetalert2';
+
+window.Swal = Swal;
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,6 +27,7 @@ Vue.use(VModal);
 
 Vue.component('new-campaign-modal', require('./components/NewCampaignModal.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
+Vue.component('support-button', require('./components/SupportButton.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

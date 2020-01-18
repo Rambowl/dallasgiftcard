@@ -70,6 +70,8 @@ class CampaignController extends Controller
 
     //persist the edited resource.
    	public function update(Campaign $campaign) {
+        dd($campaign);
+
         $campaign->update($this->validateRequest());
 
         return redirect('/campaigns/' . $campaign->id);

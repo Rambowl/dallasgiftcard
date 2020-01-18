@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-<head>
+<head class="h-full">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -9,10 +9,12 @@
 
     <title>{{ config('app.name') }}</title>
 
+
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="sweetalert2.min.css">  --}}  
 </head>
-<body class="bg-gray-400 h-screen antialiased leading-none">
+<body class="bg-gray-400 h-screen antialiased leading-none h-full">
     <div id="app">
         <nav class="bg-blue-700 shadow mb-8 py-4">
             <div class="container mx-auto px-6 md:px-0">
@@ -33,9 +35,6 @@
                             <ul class="flex items-center underline text-xl py-2 px-10">
                                 <li class="mr-10">
                                     <a class="text-blue-400 hover:text-blue-800" href="/campaigns">CAMPAIGNS</a>
-                                </li>
-                                <li class="mr-10">
-                                    <a class="text-blue-400 hover:text-blue-800" href="#">CUSTOMERS</a>
                                 </li>
                                 <li class="mr-10">
                                     <a class="text-blue-400 hover:text-blue-800" href="#">MAILING LISTS</a>
@@ -77,9 +76,16 @@
         </nav>
 
         @yield('content')
+        
+        {{-- footer --}}
+        <div class="flex justify-end bg-blue-500 mt-10 p-10">
+            <support-button></support-button>
+        </div>
+        
     </div>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 </html>

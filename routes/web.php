@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth'], function() {
 	//Route::get('/businesses/{business}', 'BusinessController@show');
 	Route::get('/businesses/{business}/edit', 'BusinessController@edit');
 	Route::put('/businesses/{business}', 'BusinessController@update');
+	
+	//logo image uploads
+	Route::get('/businesses/{business}/images/upload','BusinessController@logoCreate');
+	Route::put('/businesses/{business}/images','BusinessController@logoUpdate');
 
 	Route::get('/campaigns', 'CampaignController@index');
 	Route::post('/campaigns', 'CampaignController@store');
@@ -34,5 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/campaigns/{campaign}/edit', 'CampaignController@edit');
 	Route::put('/campaigns/{campaign}', 'CampaignController@update');
 });
+
+Route::post('/contact', 'ContactController@store');
 
 Auth::routes();

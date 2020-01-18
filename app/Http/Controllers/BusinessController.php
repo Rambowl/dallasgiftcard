@@ -51,7 +51,23 @@ class BusinessController extends Controller
     public function update(Business $business) {
         $business->update($this->validateRequest());
 
-        return redirect('/businesses/');
+        return redirect('/businesses');
+    }
+
+    //image upload for logo
+    public function logoCreate(Business $business) {
+        return view('businesses.logoupload', compact('business'));
+    }
+
+    public function logoUpdate(Business $business) {
+        $image = request()->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images').'/'.$business->id.'/',$imageName);
+
+        //update logo in the database
+        $business->update(['logo' => $imageName]);
+        
+        return response()->json(['success'=>$imageName]);
     }
 
     //validate before saving to database

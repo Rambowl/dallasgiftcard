@@ -18,9 +18,9 @@
 					<option value="Promotion">Promotion</option>
 				</select>
 
-				<label for="businesses" class="text-xl mb-2 ml-8 mr-3">For Business:</label>
+				<label for="business_id" class="text-xl mb-2 ml-8 mr-3">For Business:</label>
 
-				<select name="businesses" class="p-2 border border-blue-700">
+				<select name="business_id" class="p-2 border border-blue-700">
 					@foreach ($businesses as $business)
 						<option value="{{ $business->id }}">{{ $business->business_name }}</option>
 					@endforeach
@@ -30,7 +30,7 @@
 				<input type="text" name="type" class="p-2 border border-blue-700 opacity-50" value="{{ $campaign->type }}" disabled>
 				<label for="businesses" class="text-xl mb-2 ml-8 mr-3">For Business:</label>
 				
-				<input type="text" name=businesses value="{{ $businessName }}" class="p-2 border border-blue-700 bg-white opacity-50" disabled>
+				<input type="text" name=business_id value="{{ $businessName }}" class="p-2 border border-blue-700 bg-white opacity-50" disabled>
 			@endif
 		</div>
 

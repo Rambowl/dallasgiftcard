@@ -17,6 +17,10 @@ class Business extends Model
     	return $this->hasMany(Campaign::class);
     }
 
+    public function images() {
+        return $this->hasMany(Image::class);
+    }
+
     public function path() {
     	return "/businesses/{$this->id}";
     }

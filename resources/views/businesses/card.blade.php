@@ -13,7 +13,9 @@
 	</h3>
 	<div class="flex"> 
 		<div class="w-1/3 mr-4 flex-shrink-0">
-			<a href=""><img src="{{ $business->logo ? '/images/logo.png' : '/images/addBusinessLogo.png' }}" alt="Add business logo" width="150" height="150"></a>
+			<div slot="activator">
+			<a href="{{ $business->path().'/images/upload' }}"><img src="{{ $business->logo ? '/images/' . $business->id . '/' . $business->logo : '/images/addBusinessLogo.png' }}" alt="Add business logo" width="150" height="150"></a>
+			</div>
 		</div>
 		<div>
 			<div>

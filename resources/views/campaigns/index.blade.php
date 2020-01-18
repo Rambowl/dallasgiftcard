@@ -46,6 +46,7 @@
 				@endforelse
 			</div>
 		</div>
+		<new-campaign-modal></new-campaign-modal>
 	</div>
-	<new-campaign-modal></new-campaign-modal>
+	
 @endsection

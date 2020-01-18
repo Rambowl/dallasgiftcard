@@ -26,7 +26,7 @@
 		<div class="mb-4">
 			<label for="address_1" class="flex flex-col text-xl mb-2">Address Line 1</label>
 			<input name="address_1" type="text" class=" 
-				@error('address1')
+				@error('address_1')
 					border border-red-600 
 			   	@else 
 					border border-gray-500 
