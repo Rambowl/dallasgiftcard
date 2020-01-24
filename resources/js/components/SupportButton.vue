@@ -88,9 +88,9 @@
 						v-if="errors.verification"></span>
 
 					<div class="flex mt-6 justify-end text-base">
-						<a 	href="#"
+						<button
 							class="button border border-blue-600 block rounded py-2 px-5 bg-white text-blue-600 mr-4" 
-							@click="cancel">Cancel</a>
+							@click="cancel">Cancel</button>
 						<button 
 							type="submit"
 							class="button border border-blue-300 block rounded py-2 px-5 bg-blue-600 text-blue-100" 

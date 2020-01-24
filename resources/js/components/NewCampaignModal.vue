@@ -1,6 +1,8 @@
 <template>
 	<modal name="new-campaign" class="flex" width="720px" height="auto" @before-open="getBusinesses">
-		<form @submit.prevent="submit">
+		<form 
+			@submit.prevent="submit"
+			@keydown="submitted = false">
 			<div class="flex flex-col bg-gray-300 border border-gray-500 pl-4 pr-4 pt-2">
 				<div class="text-3xl pt-6 pb-6">
 					<h1>Create a Campaign</h1>
@@ -44,7 +46,7 @@
 
 			<footer class="flex justify-end mt-2 mb-2">
 				<button type="button" class="button border border-blue-600 block rounded py-2 px-5 bg-white text-blue-600 mr-4" @click="resetAndCancel">Cancel</button>
-				<button type="submit" class="button border border-blue-700 block rounded py-2 px-5 bg-blue-600 text-blue-100">Submit</button>
+				<button type="submit" class="button border border-blue-700 block rounded py-2 px-5 bg-blue-600 text-blue-100" :disabled="submitted">Submit</button>
 			</footer>		
 			</div>
 		</form>
@@ -52,19 +54,21 @@
 </template>
 
 <script>
-	import CampaignForm from "./CampaignForm";
+	import FormJS from "./FormJS";
 
 	export default {
 		data() {
 			return {
-				form: new CampaignForm({
+				form: new FormJS({
 					type: '',
 					title: '',
 					description: '',
 					user_id: '',
 					business_id: ''
 				}),
-				businesses: ''
+				businesses: '',
+				subText: '',
+				submitted: false
 			}
 		},
 		methods: {
@@ -72,14 +76,16 @@
 				//parse data using JSON
 				this.businesses = JSON.parse(event.params.businesses);
 				this.form.type = "Newsletter";
-				this.form.business_id = this.businesses[0].id;		
-
+				this.form.business_id = this.businesses[0].id;
+				
 			},
 			resetAndCancel() {
 				this.form.reset();
 				this.$modal.hide('new-campaign');
 			},
 			async submit() {
+				this.submitted = true;
+
 				this.form.submit('/campaigns')
 					.then(response => location = response.data.message);
 			}

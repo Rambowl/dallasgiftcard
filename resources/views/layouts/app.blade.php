@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" height="100%">
 <head class="h-full">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,8 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="sweetalert2.min.css">  --}}  
 </head>
-<body class="bg-gray-400 h-screen antialiased leading-none h-full">
-    <div id="app">
+<body class="flex flex-col bg-gray-400 h-screen antialiased leading-none h-full">
+    <div id="app" class="flex-grow">
         <nav class="bg-blue-700 shadow mb-8 py-4">
             <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-center">
@@ -78,14 +78,18 @@
         @yield('content')
         
         {{-- footer --}}
-        <div class="flex justify-end bg-blue-500 mt-10 p-10">
-            <support-button></support-button>
-        </div>
         
+        
+    </div>
+
+    <div id="app2" class="flex justify-end bg-blue-500 mt-20 p-10">
+        <support-button></support-button>
     </div>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+    
+    
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 		<div class="bg-gray-300 flex-col border border-gray-500 rounded w-10/12 p-2">
 			<div class="flex flex-row px-4 py-5 justify-between items-center mb-3 mr-3">
 				<div class="text-3xl">My Businesses</div>
-				<div><a href="\businesses\create" class="button border border-blue-300 block rounded py-2 px-5 bg-blue-600 text-blue-100">Add Business</a></div>
+				<div><a href="\businesses\create" class="button border border-blue-300 block rounded py-2 px-5 bg-blue-600 text-blue-100" @click.prevent="$modal.show('new-business')">Add Business</a></div>
 			</div>
 
 			<!-- if there are businesses.. show cards -->			
@@ -21,5 +21,6 @@
 				@endforelse
 			</div>
 		</div>
+		<new-business-modal></new-business-modal>
 	</div>
 @endsection

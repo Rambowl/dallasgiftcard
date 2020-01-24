@@ -78,8 +78,10 @@ class CampaignController extends Controller
    	}
 
    	//delete the resource.
-   	public function destroy() {
+   	public function destroy(Campaign $campaign) {
+        $campaign->delete();
 
+        return redirect('/campaigns');
    	}
 
     //method for validating campaign

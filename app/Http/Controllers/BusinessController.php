@@ -41,7 +41,11 @@ class BusinessController extends Controller
     		'user_id' => auth()->user()->id,
     	]);
 
-    	return redirect('/businesses');
+        return response()->json(['message'=>'/businesses']);
+    }
+
+    public function show(Business $business) {
+        return view('businesses.show', compact('business'));
     }
 
     public function edit(Business $business) {
@@ -50,6 +54,14 @@ class BusinessController extends Controller
 
     public function update(Business $business) {
         $business->update($this->validateRequest());
+
+        //return redirect('/businesses');
+        return response()->json(['message'=> '/businesses']);
+    }
+
+    //delete business
+    public function destroy(Business $business) {
+        $business->delete();
 
         return redirect('/businesses');
     }
@@ -75,15 +87,16 @@ class BusinessController extends Controller
     	return request()->validate([
     		'business_name' => 'required',
     		'address_1' => 'required',
-            'address_2' => '',
+            'address_2' => 'nullable',
     		'city' => 'required',
     		'state' => 'required',
-    		'zip_code' => 'required',
-            'phone_1' => '',
-            'phone_2' => '',
-            'email' => 'regex:/^.+@.+$/i',
-            'website' => '',
-            'description' => ''
+    		'zip_code' => 'required|numeric',
+            'phone_1' => 'nullable',
+            'phone_2' => 'nullable',
+            'email' => 'email',
+            'website' => 'nullable',
+            'description' => 'nullable'
     	]);
     }
 }
+

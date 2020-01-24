@@ -1,4 +1,4 @@
-class CampaignForm {
+class FormJS {
 	constructor(data) {
 		this.originalData = JSON.parse(JSON.stringify(data));
 
@@ -22,8 +22,11 @@ class CampaignForm {
 		this.submit(endpoint);
 	}
 
-	patch(endpoint) {
-		this.submit(endpoint, 'patch');		//form.patch will do a patch request
+	put(endpoint) {
+		//this.submit(endpoint, 'put');		//form.patch will do a patch request
+		return axios.put(endpoint, this.data())
+			.catch(this.onFail.bind(this))
+			.then(this.onSuccess.bind(this));
 	}
 
 	delete(endpoint) {
@@ -56,4 +59,4 @@ class CampaignForm {
 	}
 }
 
-export default CampaignForm;
+export default FormJS;

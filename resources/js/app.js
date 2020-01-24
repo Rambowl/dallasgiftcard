@@ -26,6 +26,7 @@ window.Swal = Swal;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('new-campaign-modal', require('./components/NewCampaignModal.vue').default);
+Vue.component('new-business-modal', require('./components/NewBusinessModal.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('support-button', require('./components/SupportButton.vue').default);
 /**
@@ -36,4 +37,8 @@ Vue.component('support-button', require('./components/SupportButton.vue').defaul
 
 const app = new Vue({
     el: '#app',
+});
+
+const app2 = new Vue({
+    el: '#app2',
 });

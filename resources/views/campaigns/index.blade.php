@@ -5,7 +5,7 @@
 		<div class="bg-gray-300 flex-col border border-gray-500 rounded w-10/12">		
 			@if (count($businesses) === 0)
 				<div class="px-4 py-3 justify-between items-center mr-3 text-red-700 text-xl mt-3">
-					You have to add your business before you can create a 'Campaign'. Click <a href="businesses" class="text-blue-600 underline">here</a> to add your  business.
+					You have to add your business before you can create a 'Campaign'. Click <a href="businesses" class="text-blue-600 underline" @click.prevent="$modal.show('new-business')">here</a> to add your  business.
 				</div>
 			@endif
 			
@@ -13,22 +13,16 @@
 				<div class="text-3xl">Campaign Management</div>
 				<div>
 					
-					@if (count($businesses) > 0)
-						@foreach ($businesses as $business)
-						@php
-							$busInfo[] = $business->business_name;
-						@endphp
-							
-						@endforeach					
-						<a href="campaigns/create" class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600" @click.prevent="$modal.show('new-campaign', 		
+					@if (count($businesses) > 0)					
+						<button class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600" @click.prevent="$modal.show('new-campaign', 		
 							{
-								businesses: '{{ json_encode($businesses) }}'
+								businesses: '{{ json_encode($businesses, JSON_HEX_APOS) }}'
 							})">
-							New Campaign</a></div>
+							New Campaign</button></div>
 
 					@else
-						<a class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600 cursor-not-allowed opacity-50">
-							New Campaign</a></div>
+						<button class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600 cursor-not-allowed opacity-50" disabled>
+							New Campaign</button></div>
 					@endif
 			</div>
 
@@ -46,6 +40,7 @@
 				@endforelse
 			</div>
 		</div>
+		<new-business-modal></new-business-modal>
 		<new-campaign-modal></new-campaign-modal>
 	</div>
 	
