@@ -70,7 +70,7 @@ class CampaignController extends Controller
 
     //persist the edited resource.
    	public function update(Campaign $campaign) {
-        dd($campaign);
+        //dd($campaign);
 
         $campaign->update($this->validateRequest());
 
@@ -84,13 +84,35 @@ class CampaignController extends Controller
         return redirect('/campaigns');
    	}
 
+    public function updateTemplate(Campaign $campaign) {
+        $campaign->update($this->validateRequest());
+
+        $campaign->updateTemplate(request('template'));
+    }
+
+    public function showNewsLetter(Campaign $campaign) {
+        return view('campaigns.newsletter.show', compact('campaign'));
+    }
+
+    public function updateNewsletter(Campaign $campaign) {
+        $image = request()->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images').'/'.$business->id.'/',$imageName);
+
+        //update logo in the database
+        $business->update(['logo' => $imageName]);
+        
+        //return response()->json(['success'=>$imageName]);
+    }
+
     //method for validating campaign
     protected function validateRequest() {
         return request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'type' => 'required',
-            'business_id' => 'required'
+            'type' => 'sometimes',
+            'business_id' => 'sometimes',
+            'template' => 'sometimes'
         ]);
     }
 }

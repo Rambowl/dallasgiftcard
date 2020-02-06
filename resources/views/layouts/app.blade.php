@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}" height="100%">
-<head class="h-full">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/dist/dropzone.css">
+    <script src="/dist/dropzone.js"></script>
 
     <title>{{ config('app.name') }}</title>
-
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="sweetalert2.min.css">  --}}  
 </head>
-<body class="flex flex-col bg-gray-400 h-screen antialiased leading-none h-full">
-    <div id="app" class="flex-grow">
+<body class="flex flex-col bg-gray-400 min-h-screen antialiased leading-none">
+    <div id="app" class="flex flex-col flex-grow">
         <nav class="bg-blue-700 shadow mb-8 py-4">
             <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-center">
@@ -77,19 +78,63 @@
 
         @yield('content')
         
-        {{-- footer --}}
-        
-        
-    </div>
+    </div> 
 
-    <div id="app2" class="flex justify-end bg-blue-500 mt-20 p-10">
-        <support-button></support-button>
-    </div>
-
+    <footer id="footer" class="relative bottom-0 w-full">
+        <div class="flex justify-end bg-blue-500 mt-10 p-10">
+            <support-button></support-button>
+        </div>
+    </footer>
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
-    
-    
+
+    <script>
+        Dropzone.options.logoDropzone =
+        {
+            maxFilesize: 3,
+            acceptedFiles: ".jpeg,.jpg,.png",
+            addRemoveLinks: true,
+            maxFiles: 1,
+            timeout: 5000,
+            success: function(file, response) 
+            {
+                console.log(response);
+
+                return window.location.replace("../../../businesses");
+            },
+            error: function(file, response)
+            {
+                if (file.size >= 3*1024*1024) {
+                 alert("File was Larger than 3Mb!");
+                }
+                console.log(file.size);
+               return false;
+            }
+        };
+
+        Dropzone.options.newsletterDropzone =
+        {
+            maxFilesize: 5,
+            acceptedFiles: ".jpeg,.jpg,.png",
+            addRemoveLinks: true,
+            maxFiles: 1,
+            timeout: 5000,
+            success: function(file, response) 
+            {
+                console.log(response);
+
+                return window.location.replace("../../../businesses");
+            },
+            error: function(file, response)
+            {
+                if (file.size >= 5*1024*1024) {
+                 alert("File was Larger than 5Mb!");
+                }
+                console.log(file.size);
+               return false;
+            }
+        };
+    </script>
 
 </body>
 </html>

@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::put('/businesses/{business}', 'BusinessController@update');
 	Route::delete('/businesses/{business}', 'BusinessController@destroy');
 	
-	//logo image uploads
+	//business logo image uploads
 	Route::get('/businesses/{business}/images/upload','BusinessController@logoCreate');
 	Route::put('/businesses/{business}/images','BusinessController@logoUpdate');
 
@@ -40,6 +40,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/campaigns/{campaign}/edit', 'CampaignController@edit');
 	Route::put('/campaigns/{campaign}', 'CampaignController@update');
 	Route::delete('/campaigns/{campaign}', 'CampaignController@destroy');
+	//update the campaign template
+	Route::put('/campaigns/{campaign}', 'CampaignController@updateTemplate');	
+
+	//Route::put('/campaigns/{campaign}/content', 'CampaignController@updateNewsletter');
+	//Route::get('/campaigns/{campaign}/content', 'CampaignController@showNewsletter');	
 });
 
 Route::post('/contact', 'ContactController@store');

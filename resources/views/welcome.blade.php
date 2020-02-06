@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex flex-col">
+<div class="flex flex-col h-full">
     <div class="flex items-center justify-center">
         <div class="flex flex-col justify-center items-center w-full">
             

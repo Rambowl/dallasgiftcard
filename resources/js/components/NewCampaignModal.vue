@@ -12,6 +12,7 @@
 					<select name="type" class="p-2 border border-blue-700" v-model="form.type">
 						<option value="Newsletter">Newsletter</option>
 						<option value="Buy Now">Buy Now</option>
+						<option value="Subscription">Subscription</option>
 						<option value="Promotion">Promotion</option>
 					</select>
 

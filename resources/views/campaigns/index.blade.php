@@ -21,7 +21,7 @@
 							New Campaign</button></div>
 
 					@else
-						<button class="button border border-blue-300 block rounded py-2 px-5 text-blue-100 bg-blue-600 cursor-not-allowed opacity-50" disabled>
+						<button class="button border block rounded py-2 px-5 text-blue-100 bg-blue-600 cursor-not-allowed opacity-50" disabled>
 							New Campaign</button></div>
 					@endif
 			</div>

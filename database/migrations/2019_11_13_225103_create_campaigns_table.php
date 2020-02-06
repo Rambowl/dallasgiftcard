@@ -20,6 +20,7 @@ class CreateCampaignsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('type');
+            $table->string('template')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

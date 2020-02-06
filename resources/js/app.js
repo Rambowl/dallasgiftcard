@@ -11,7 +11,6 @@ import VModal from 'vue-js-modal';
 Vue.use(VModal);
 
 import Swal from 'sweetalert2';
-
 window.Swal = Swal;
 
 /**
@@ -27,7 +26,9 @@ window.Swal = Swal;
 
 Vue.component('new-campaign-modal', require('./components/NewCampaignModal.vue').default);
 Vue.component('new-business-modal', require('./components/NewBusinessModal.vue').default);
+//Vue.component('upload-image-modal', require('./components/ImageDropModal.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
+Vue.component('design-campaign', require('./campaigns/DesignCampaign.vue').default);
 Vue.component('support-button', require('./components/SupportButton.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,10 +36,18 @@ Vue.component('support-button', require('./components/SupportButton.vue').defaul
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
+
+Vue.filter('kb', val => {
+  return Math.floor(val/1024);  
+});
+
+
+new Vue({
     el: '#app',
 });
 
-const app2 = new Vue({
-    el: '#app2',
+new Vue({
+    el: '#footer',
 });

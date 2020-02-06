@@ -19,6 +19,10 @@ class Campaign extends Model
 		return $this::find($id)->updated_at->isoFormat('MM/DD/YYYY, hh:mm A');
 	}
 
+	public function updateTemplate($selection) {
+		$this->update(['template' => $selection]);
+	}
+
 	//the path of the campaigns
     public function path() {
     	return "/campaigns/{$this->id}";

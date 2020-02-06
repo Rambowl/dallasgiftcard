@@ -74,7 +74,11 @@
 		</div>
 	</div>
 	<footer class="flex justify-end">
-		<form method="POST" onsubmit="return confirm('Are you sure you want to delete?')" action="{{ $business->path() }}">
+		<form method="POST" onsubmit="{{ (App\Campaign::where('business_id', $business->id)->count() > 0) ? "Swal.fire({
+			  icon: 'error',
+			  title: 'Delete Failed!',
+			  text: 'There are Campaigns associated with this Business.',
+			});return false;" : "return confirm('Are you sure you want to delete?')" }}" action="{{ $business->path() }}">
 			@method('DELETE')
 			@csrf
 
