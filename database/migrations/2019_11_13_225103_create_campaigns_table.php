@@ -21,7 +21,8 @@ class CreateCampaignsTable extends Migration
             $table->text('description');
             $table->string('type');
             $table->string('template')->nullable();
-            $table->timestamps();
+            $table->string('newsletter')->nullable();
+            $table->timestamps();            
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('business_id')->references('id')->on('businesses');

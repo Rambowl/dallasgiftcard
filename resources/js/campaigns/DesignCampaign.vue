@@ -25,23 +25,14 @@
 			</div>
 		</div>
 		<!-- UPLOAD NEWSLETTER -->
-		<div id="drop-newsletter" class="bg-gray-300 flex-col border border-gray-500 rounded px-4 mr-3 pb-5 w-3/4" v-else>
+		<div id="drop-newsletter" class="bg-gray-300 flex-col border border-gray-500 rounded px-4 mr-3 pb-5 w-3/4" v-show="!templateNotSelected">
 			<h3 class="m-3 mb-5 font-bold text-2xl">Upload Your Newsletter</h3>
 		    <ul class="mb-3 ml-4">
 		        <li class="ml-5 mb-2 list-disc" v-for="dropList in dropLists">{{ dropList.message }}</li>
 		    </ul>
-		    <div class="flex flex-col justify-center border border-black bg-yellow-200 p-5" @drop.prevent="addFile" @dragover.prevent>
-			    <h2 class="flex justify-center pb-4">Files to Upload (Drag them over)</h2>
-				<ul>
-				    <li v-for="file in files">
-				      {{ file.name }} ({{ file.size | kb }} kb) <button @click="removeFile(file)" title="Remove">X</button>
-				    </li>
-				</ul>	
-			    <div class="flex justify-center mt-5">		
-				  	<button v-if="uploadDisabled" :disabled="uploadDisabled" class="flex button border block rounded py-2 px-5 bg-blue-300 text-blue-100 opacity-50 cursor-not-allowed">Upload</button>
-				  	<button v-else class="flex button border block rounded py-2 px-5 bg-blue-600 text-blue-100" @click="upload">Upload</button>
-				</div>
-			</div>
+		    			    
+		    <slot></slot>
+			
 		</div>
 		
 		<!-- right side -->
@@ -94,12 +85,10 @@
 	import FormJS from ".././components/FormJS";
 
 	export default {
-		props: [ 'id', 'title', 'description', 'type', 'csrf', 'template'],
+		props: [ 'id', 'title', 'description', 'type', 'template'],
 	  	mounted: function() {
-	  		if (this.template == '') {
-	  			console.log("it is null");
-	  		}
-	  		else {
+	  		//if template was previously selected..
+	  		if (this.template !== '') {
 	  			this.templateNotSelected = false;
 	  		}
 	  	},
@@ -130,7 +119,7 @@
 		methods: {
 			tempSelected(data) {
 				//give warning message if user selects Design Online
-				if (data.toElement.id == "Design Online") {
+				if (data.toElement.id == "Design") {
 					Swal.fire({
 					  icon: 'warning',
 					  title: 'Oops...',
@@ -152,39 +141,6 @@
 				
 			},
 
-			addFile(e) {
-		      let droppedFiles = e.dataTransfer.files;
-		      if(!droppedFiles) return;
-		      // this tip, convert FileList to array, credit: https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-		      ([...droppedFiles]).forEach(f => {
-		        this.files.push(f);
-		      });
-		    },
-		    removeFile(file){
-		      this.files = this.files.filter(f => {
-		        return f != file;
-		      });      
-		    },
-		    upload() {
-		      
-		      let formData = new FormData();
-		      this.files.forEach((f,x) => {
-		        formData.append('file'+(x+1), f);
-		      });
-		      
-		      fetch('https://httpbin.org/post', {
-		        method:'POST',
-		        body: formData
-		      })
-		      .then(res => res.json())
-		      .then(res => {
-		         console.log('done uploading', res);
-		      })
-		      .catch(e => {
-		        console.error(JSON.stringify(e.message));
-		      });
-		      
-		    },
 			async submit() {
 				this.submitted = true;
 

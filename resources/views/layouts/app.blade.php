@@ -123,7 +123,7 @@
             {
                 console.log(response);
 
-                return window.location.replace("../../../businesses");
+                //return window.location.replace("../../../campaigns");
             },
             error: function(file, response)
             {

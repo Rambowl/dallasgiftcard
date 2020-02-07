@@ -12,7 +12,6 @@ Vue.use(VModal);
 
 import Swal from 'sweetalert2';
 window.Swal = Swal;
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -35,14 +34,6 @@ Vue.component('support-button', require('./components/SupportButton.vue').defaul
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.config.productionTip = false;
-Vue.config.devtools = false;
-
-Vue.filter('kb', val => {
-  return Math.floor(val/1024);  
-});
-
 
 new Vue({
     el: '#app',

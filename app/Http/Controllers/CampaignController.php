@@ -37,7 +37,6 @@ class CampaignController extends Controller
 
     //persist the new resource.
     public function store() {
-
         //dd(request()->all());
         //validation
         $this->validateRequest();
@@ -69,13 +68,13 @@ class CampaignController extends Controller
     }
 
     //persist the edited resource.
-   	public function update(Campaign $campaign) {
+   	/*public function update(Campaign $campaign) {
         //dd($campaign);
 
         $campaign->update($this->validateRequest());
 
         return redirect('/campaigns/' . $campaign->id);
-   	}
+   	}*/
 
    	//delete the resource.
    	public function destroy(Campaign $campaign) {
@@ -87,10 +86,31 @@ class CampaignController extends Controller
     public function updateTemplate(Campaign $campaign) {
         $campaign->update($this->validateRequest());
 
-        $campaign->updateTemplate(request('template'));
+        //newsletter upload
+        $image = request()->file('file');
+        if (isset($image)) {
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images').'/'.$campaign->id.'/newsletter/',$imageName);
+
+            if (!isset($campaign->template)) {
+                $campaign->update(['template' => 'Upload']);
+            }
+            //update logo in the database
+            $campaign->update(['newsletter' => $imageName]);
+
+            return response()->json(['success'=>$imageName]);
+        }
+        //else validate request
+        /*else {
+            $campaign->update($this->validateRequest());
+        }*/
+        
+        
+        
+        
     }
 
-    public function showNewsLetter(Campaign $campaign) {
+    /*public function showNewsLetter(Campaign $campaign) {
         return view('campaigns.newsletter.show', compact('campaign'));
     }
 
@@ -103,16 +123,17 @@ class CampaignController extends Controller
         $business->update(['logo' => $imageName]);
         
         //return response()->json(['success'=>$imageName]);
-    }
+    }*/
 
     //method for validating campaign
     protected function validateRequest() {
         return request()->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'sometimes',
+            'description' => 'sometimes',
             'type' => 'sometimes',
             'business_id' => 'sometimes',
-            'template' => 'sometimes'
+            'template' => 'sometimes',
+            //'newsletter' => 'sometimes'
         ]);
     }
 }

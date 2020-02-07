@@ -7,9 +7,19 @@
 			title="{{ $campaign->title }}" 
 			description="{{ $campaign->description }}"
 			type="{{ $campaign->type }}"
-			csrf="{{ csrf_token() }}"
 			template="{{ $campaign->template }}">
-		</design-campaign>
-		
-</div>
+			
+       		<form action="{{ $campaign->path() }}"
+            	class="dropzone bg-yellow-200 m-2"
+            	method="POST"
+            	id="newsletterDropzone">
+        		@csrf
+        		@method('PUT')
+            	@error('file')
+
+            	<p class="text-red-600 text-sm mt-2 italic">{{ $errors->first('file.message') }} </p>
+            	@enderror  
+        	</form>
+		</design-campaign>	
+	</div>
 @endsection

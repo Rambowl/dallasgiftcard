@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/campaigns/create', 'CampaignController@create');
 	Route::get('/campaigns/{campaign}', 'CampaignController@show');
 	Route::get('/campaigns/{campaign}/edit', 'CampaignController@edit');
-	Route::put('/campaigns/{campaign}', 'CampaignController@update');
+	//Route::put('/campaigns/{campaign}', 'CampaignController@update');
 	Route::delete('/campaigns/{campaign}', 'CampaignController@destroy');
 	//update the campaign template
 	Route::put('/campaigns/{campaign}', 'CampaignController@updateTemplate');	

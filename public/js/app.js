@@ -1854,24 +1854,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_FormJS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! .././components/FormJS */ "./resources/js/components/FormJS.js");
 
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1957,11 +1939,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id', 'title', 'description', 'type', 'csrf', 'template'],
+  props: ['id', 'title', 'description', 'type', 'template'],
   mounted: function mounted() {
-    if (this.template == '') {
-      console.log("it is null");
-    } else {
+    //if template was previously selected..
+    if (this.template !== '') {
       this.templateNotSelected = false;
     }
   },
@@ -1996,7 +1977,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   methods: {
     tempSelected: function tempSelected(data) {
       //give warning message if user selects Design Online
-      if (data.toElement.id == "Design Online") {
+      if (data.toElement.id == "Design") {
         Swal.fire({
           icon: 'warning',
           title: 'Oops...',
@@ -2014,39 +1995,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           });*/
         }
     },
-    addFile: function addFile(e) {
-      var _this = this;
-
-      var droppedFiles = e.dataTransfer.files;
-      if (!droppedFiles) return; // this tip, convert FileList to array, credit: https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-
-      _toConsumableArray(droppedFiles).forEach(function (f) {
-        _this.files.push(f);
-      });
-    },
-    removeFile: function removeFile(file) {
-      this.files = this.files.filter(function (f) {
-        return f != file;
-      });
-    },
-    upload: function upload() {
-      var formData = new FormData();
-      this.files.forEach(function (f, x) {
-        formData.append('file' + (x + 1), f);
-      });
-      fetch('https://httpbin.org/post', {
-        method: 'POST',
-        body: formData
-      }).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        console.log('done uploading', res);
-      })["catch"](function (e) {
-        console.error(JSON.stringify(e.message));
-      });
-    },
     submit: function submit() {
-      var _this2 = this;
+      var _this = this;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function submit$(_context) {
         while (1) {
@@ -2055,7 +2005,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
               this.submitted = true;
               this.form.put('/campaigns/' + this.id).then(function (response) {
                 Swal.fire('Database Updated!', 'Your changes have been saved!', 'success');
-                _this2.needsSave = false;
+                _this.needsSave = false;
               });
 
             case 2:
@@ -24124,102 +24074,43 @@ var render = function() {
             ])
           ]
         )
-      : _c(
-          "div",
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
           {
-            staticClass:
-              "bg-gray-300 flex-col border border-gray-500 rounded px-4 mr-3 pb-5 w-3/4",
-            attrs: { id: "drop-newsletter" }
-          },
-          [
-            _c("h3", { staticClass: "m-3 mb-5 font-bold text-2xl" }, [
-              _vm._v("Upload Your Newsletter")
-            ]),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "mb-3 ml-4" },
-              _vm._l(_vm.dropLists, function(dropList) {
-                return _c("li", { staticClass: "ml-5 mb-2 list-disc" }, [
-                  _vm._v(_vm._s(dropList.message))
-                ])
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-col justify-center border border-black bg-yellow-200 p-5",
-                on: {
-                  drop: function($event) {
-                    $event.preventDefault()
-                    return _vm.addFile($event)
-                  },
-                  dragover: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c("h2", { staticClass: "flex justify-center pb-4" }, [
-                  _vm._v("Files to Upload (Drag them over)")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.files, function(file) {
-                    return _c("li", [
-                      _vm._v(
-                        "\n\t\t\t      " +
-                          _vm._s(file.name) +
-                          " (" +
-                          _vm._s(_vm._f("kb")(file.size)) +
-                          " kb) "
-                      ),
-                      _c(
-                        "button",
-                        {
-                          attrs: { title: "Remove" },
-                          on: {
-                            click: function($event) {
-                              return _vm.removeFile(file)
-                            }
-                          }
-                        },
-                        [_vm._v("X")]
-                      )
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex justify-center mt-5" }, [
-                  _vm.uploadDisabled
-                    ? _c(
-                        "button",
-                        {
-                          staticClass:
-                            "flex button border block rounded py-2 px-5 bg-blue-300 text-blue-100 opacity-50 cursor-not-allowed",
-                          attrs: { disabled: _vm.uploadDisabled }
-                        },
-                        [_vm._v("Upload")]
-                      )
-                    : _c(
-                        "button",
-                        {
-                          staticClass:
-                            "flex button border block rounded py-2 px-5 bg-blue-600 text-blue-100",
-                          on: { click: _vm.upload }
-                        },
-                        [_vm._v("Upload")]
-                      )
-                ])
-              ]
-            )
-          ]
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.templateNotSelected,
+            expression: "!templateNotSelected"
+          }
+        ],
+        staticClass:
+          "bg-gray-300 flex-col border border-gray-500 rounded px-4 mr-3 pb-5 w-3/4",
+        attrs: { id: "drop-newsletter" }
+      },
+      [
+        _c("h3", { staticClass: "m-3 mb-5 font-bold text-2xl" }, [
+          _vm._v("Upload Your Newsletter")
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "mb-3 ml-4" },
+          _vm._l(_vm.dropLists, function(dropList) {
+            return _c("li", { staticClass: "ml-5 mb-2 list-disc" }, [
+              _vm._v(_vm._s(dropList.message))
+            ])
+          }),
+          0
         ),
+        _vm._v(" "),
+        _vm._t("default")
+      ],
+      2
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -37934,11 +37825,6 @@ Vue.component('support-button', __webpack_require__(/*! ./components/SupportButt
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.config.productionTip = false;
-Vue.config.devtools = false;
-Vue.filter('kb', function (val) {
-  return Math.floor(val / 1024);
-});
 new Vue({
   el: '#app'
 });
